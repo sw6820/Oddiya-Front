@@ -1,0 +1,348 @@
+.container {
+    min-height: 100vh;
+    background: #f8f9fa;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* 헤더 */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: white;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.backButton {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.backButton:hover {
+    background: #f0f0f0;
+}
+
+.header h1 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+/* 미리보기 섹션 */
+.previewSection {
+    padding: 24px 20px;
+    background: white;
+    margin: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.previewSection h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+
+.videoPreview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* 사진 선택 섹션 */
+.photosSection {
+    padding: 24px 20px;
+    background: white;
+    margin: 0 20px 20px 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.photosSection h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 20px 0;
+}
+
+.photoGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 16px;
+}
+
+.photoItem {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.photoItem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photoOverlay {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* 액션 섹션 */
+.actionSection {
+    padding: 0 20px 20px 20px;
+}
+
+.createButton {
+    width: 100%;
+    background: #4BB2ED;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(75, 178, 237, 0.2);
+}
+
+.createButton:hover:not(:disabled) {
+    background: #3a9fd8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(75, 178, 237, 0.3);
+}
+
+.createButton:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 렌더링 진행률 */
+.renderingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    color: white;
+}
+
+.renderingContent {
+    text-align: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+}
+
+.renderingIcon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    animation: spin 2s linear infinite;
+}
+
+.renderingContent h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.renderingContent p {
+    font-size: 16px;
+    opacity: 0.8;
+    margin: 0;
+}
+
+.progressBar {
+    width: 300px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.progressFill {
+    height: 100%;
+    background: #4BB2ED;
+    transition: width 0.3s ease;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 성공 메시지 */
+.successOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    color: white;
+}
+
+.successContent {
+    text-align: center;
+    padding: 40px;
+    background: rgba(76, 175, 80, 0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 2px solid #4CAF50;
+}
+
+.successIcon {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.successContent h3 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    color: #4CAF50;
+}
+
+.successContent p {
+    font-size: 16px;
+    opacity: 0.8;
+    margin: 0;
+}
+
+.successNote {
+    font-size: 14px !important;
+    color: #4CAF50 !important;
+    margin: 16px 0 !important;
+    font-weight: 500;
+}
+
+.closeButton {
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 16px;
+}
+
+.closeButton:hover {
+    background: #5a6268;
+}
+
+.downloadButton {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 16px 8px 0 0;
+}
+
+.downloadButton:hover {
+    background: #45a049;
+    transform: translateY(-1px);
+}
+
+.emptyPhotos {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.emptyPhotos p {
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.emptyPhotos p:first-child {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .header {
+        padding: 16px;
+    }
+
+    .header h1 {
+        font-size: 1.2rem;
+    }
+
+    .previewSection,
+    .photosSection {
+        margin: 16px;
+        padding: 20px;
+    }
+
+    .photoGrid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 12px;
+    }
+
+    .progressBar {
+        width: 250px;
+    }
+
+    .renderingContent,
+    .successContent {
+        padding: 30px;
+        margin: 20px;
+    }
+}

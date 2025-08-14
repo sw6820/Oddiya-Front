@@ -1,85 +1,145 @@
-import { Player } from "@remotion/player";
+import React, { useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import React, { useMemo, useState } from "react";
-import { Main } from "../remotion/MyComp/Main";
-import {
-  CompositionProps,
-  defaultMyCompProps,
-  DURATION_IN_FRAMES,
-  VIDEO_FPS,
-  VIDEO_HEIGHT,
-  VIDEO_WIDTH,
-} from "../../types/constants";
-import { z } from "zod";
-import { RenderControls } from "../components/RenderControls";
-import { Tips } from "../components/Tips/Tips";
-import { Spacing } from "../components/Spacing";
-
-const container: React.CSSProperties = {
-  maxWidth: 768,
-  margin: "auto",
-  marginBottom: 20,
-};
-
-const outer: React.CSSProperties = {
-  borderRadius: "var(--geist-border-radius)",
-  overflow: "hidden",
-  boxShadow: "0 0 200px rgba(0, 0, 0, 0.15)",
-  marginBottom: 40,
-  marginTop: 60,
-};
-
-const player: React.CSSProperties = {
-  width: "100%",
-};
+import { useRouter } from "next/router";
+import BottomNavigationBar from "../components/BottomNavigationBar";
+import styles from "./index.module.css";
 
 const Home: NextPage = () => {
-  const [text, setText] = useState<string>(defaultMyCompProps.title);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showDateField, setShowDateField] = useState(false);
+  const [selectedDestination, setSelectedDestination] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const router = useRouter();
 
-  const inputProps: z.infer<typeof CompositionProps> = useMemo(() => {
-    return {
-      title: text,
-    };
-  }, [text]);
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      // Navigate to search results page with the query
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
+
+  const handleExploreClick = () => {
+    // Navigate to the explore/recommendation page
+    router.push("/search");
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      if (searchQuery.trim()) {
+        // 엔터를 눌렀을 때도 날짜 선택 필드 표시
+        setSelectedDestination(searchQuery.trim());
+        setShowDateField(true);
+      }
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+  };
+
+  const handleDateSubmit = () => {
+    if (startDate && endDate && selectedDestination) {
+      // 여행 계획 페이지로 이동
+      router.push({
+        pathname: '/travel-plan',
+        query: {
+          destination: selectedDestination,
+          startDate: startDate,
+          endDate: endDate
+        }
+      });
+    }
+  };
 
   return (
-    <div>
+    <div className={styles.container}>
       <Head>
-        <title>Remotion and Next.js</title>
-        <meta name="description" content="Remotion and Next.js" />
+        <title>아이의 시선에서 추억을 완성하는 여행 - Oddiya</title>
+        <meta name="description" content="여행의 여운을 오래 남도록 오디야를 해보세요" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div style={container}>
-        <div className="cinematics" style={outer}>
-          <Player
-            component={Main}
-            inputProps={inputProps}
-            durationInFrames={DURATION_IN_FRAMES}
-            fps={VIDEO_FPS}
-            compositionHeight={VIDEO_HEIGHT}
-            compositionWidth={VIDEO_WIDTH}
-            style={player}
-            controls
-            autoPlay
-            loop
-          />
+
+      <main className={styles.main}>
+        <div className={styles.content}>
+          {/* Main Title Section */}
+          <div className={styles.titleSection}>
+            <h1 className={styles.title}>
+              <span className={styles.titleLine1}>아이의 시선에서</span>
+              <span className={styles.titleLine2}>추억을 완성하는 여행</span>
+            </h1>
+            <p className={styles.subtitle}>
+              여행의 여운을 오래 남도록 오디야를 해보세요
+            </p>
+          </div>
+
+          {/* Search Section */}
+          <div className={styles.searchSection}>
+            <div className={styles.searchBox}>
+              <div className={styles.searchIcon}>🔍</div>
+              <input
+                type="text"
+                placeholder="어디로 떠나시나요?"
+                value={searchQuery}
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
+                className={styles.searchInput}
+              />
+            </div>
+
+            {/* Date Selection Fields */}
+            {showDateField && (
+              <div className={styles.dateSection}>
+                <div className={styles.dateFields}>
+                  <div className={styles.dateField}>
+                    <label className={styles.dateLabel}>시작일</label>
+                    <input
+                      type="date"
+                      value={startDate}
+                      onChange={(e) => setStartDate(e.target.value)}
+                      className={styles.dateInput}
+                    />
+                  </div>
+                  <div className={styles.dateField}>
+                    <label className={styles.dateLabel}>종료일</label>
+                    <input
+                      type="date"
+                      value={endDate}
+                      onChange={(e) => setEndDate(e.target.value)}
+                      className={styles.dateInput}
+                    />
+                  </div>
+                </div>
+                <button
+                  onClick={handleDateSubmit}
+                  className={styles.dateSubmitButton}
+                  disabled={!startDate || !endDate}
+                >
+                  여행 계획 만들기
+                </button>
+              </div>
+            )}
+
+            {/* Content Search Link */}
+            <div className={styles.contentSearchLink}>
+              <button
+                onClick={handleExploreClick}
+                className={styles.contentSearchButton}
+              >
+                여행지를 고르지 못하셨나요?
+              </button>
+            </div>
+          </div>
         </div>
-        <RenderControls
-          text={text}
-          setText={setText}
-          inputProps={inputProps}
-        ></RenderControls>
-        <Spacing></Spacing>
-        <Spacing></Spacing>
-        <Spacing></Spacing>
-        <Spacing></Spacing>
-        <Tips></Tips>
-      </div>
+      </main>
+
+      <BottomNavigationBar />
     </div>
   );
 };

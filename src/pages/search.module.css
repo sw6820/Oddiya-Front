@@ -1,0 +1,235 @@
+.container {
+    min-height: 100vh;
+    background: #f8f9fa;
+    padding-bottom: 80px;
+    /* Space for bottom navigation */
+}
+
+.main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-top: 2rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-family: 'Pretendard, sans-serif';
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    font-family: 'Pretendard, sans-serif';
+}
+
+.searchSection {
+    margin-bottom: 2rem;
+}
+
+.searchBox {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.searchBox:focus-within {
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.searchInput {
+    flex: 1;
+    border: none;
+    padding: 16px 24px;
+    font-size: 16px;
+    outline: none;
+    font-family: 'Pretendard, sans-serif';
+}
+
+.searchInput::placeholder {
+    color: #999;
+}
+
+.searchButton {
+    background: #4BB2ED;
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Pretendard, sans-serif';
+}
+
+.searchButton:hover {
+    background: #3a9fd8;
+}
+
+.filterSection {
+    margin-bottom: 2rem;
+}
+
+.categoryButtons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.categoryButton {
+    background: white;
+    color: #666;
+    border: 2px solid #e0e0e0;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Pretendard, sans-serif';
+}
+
+.categoryButton:hover {
+    border-color: #4BB2ED;
+    color: #4BB2ED;
+}
+
+.categoryButton.active {
+    background: #4BB2ED;
+    color: white;
+    border-color: #4BB2ED;
+}
+
+.resultsSection {
+    margin-bottom: 2rem;
+}
+
+.destinationsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.destinationCard {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.destinationCard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.cardImage {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.destinationCard:hover .image {
+    transform: scale(1.05);
+}
+
+.category {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Pretendard, sans-serif';
+}
+
+.cardContent {
+    padding: 20px;
+}
+
+.destinationName {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-family: 'Pretendard, sans-serif';
+}
+
+.destinationDescription {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
+    font-family: 'Pretendard, sans-serif';
+}
+
+.noResults {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #666;
+    font-family: 'Pretendard, sans-serif';
+}
+
+.noResults p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .main {
+        padding: 15px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .searchBox {
+        flex-direction: column;
+        border-radius: 25px;
+    }
+
+    .searchButton {
+        border-radius: 0 0 25px 25px;
+    }
+
+    .destinationsGrid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .categoryButtons {
+        gap: 0.5rem;
+    }
+
+    .categoryButton {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+}

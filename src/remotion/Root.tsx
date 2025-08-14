@@ -1,5 +1,6 @@
 import { Composition } from "remotion";
 import { Main } from "./MyComp/Main";
+import { BeatVideo } from "./MyComp/BeatVideo";
 import {
   COMP_NAME,
   defaultMyCompProps,
@@ -32,6 +33,15 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={{
           outProgress: 0,
         }}
+      />
+      <Composition
+        id="BeatVideo"
+        component={BeatVideo}
+        durationInFrames={450}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={defaultMyCompProps}
       />
     </>
   );

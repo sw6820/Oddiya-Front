@@ -1,0 +1,361 @@
+.container {
+    min-height: 100vh;
+    background: #ffffff;
+    padding-bottom: 80px;
+}
+
+.main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Section */
+.header {
+    background: #ffffff;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.headerContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.backButton {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #000;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: opacity 0.2s ease;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.backButton:hover {
+    opacity: 0.7;
+}
+
+.travelInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.destination {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: #000;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.dateInfo {
+    font-size: 1rem;
+    color: #000;
+    font-weight: 400;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.shareButton {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #000;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: opacity 0.2s ease;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.shareButton:hover {
+    opacity: 0.7;
+}
+
+/* Photo Gallery */
+.photoGallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+.photoItem {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+}
+
+.photoContainer {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    aspect-ratio: 4/3;
+}
+
+.photoContainer:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.photoContainer:hover .photo {
+    transform: scale(1.05);
+}
+
+.photoOverlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 1.5rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.photoContainer:hover .photoOverlay {
+    transform: translateY(0);
+}
+
+.photoTitle {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.photoDescription {
+    font-size: 0.9rem;
+    margin: 0 0 1rem 0;
+    opacity: 0.9;
+    font-family: 'Pretendard', sans-serif;
+    line-height: 1.4;
+}
+
+.photoTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.3rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    font-family: 'Pretendard', sans-serif;
+    backdrop-filter: blur(10px);
+}
+
+/* Loading State */
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 2rem;
+}
+
+.loadingSpinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #4BB2ED;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loadingContainer p {
+    font-size: 1.1rem;
+    color: #666;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* Error State */
+.errorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 2rem;
+    text-align: center;
+}
+
+.errorContainer p {
+    font-size: 1.1rem;
+    color: #666;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.backButton {
+    color: black;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.backButton:hover {
+    background: #3a9fd8;
+    transform: translateY(-2px);
+}
+
+/* Selection Button */
+.selectButton {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.selectButton:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+.selectButton.selected {
+    background: #4BB2ED;
+    border-color: #4BB2ED;
+}
+
+/* Selection Bar */
+.selectionBar {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.selectionInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.selectionCount {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.planButton {
+    background: #4BB2ED;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.planButton:hover {
+    background: #3a9fd8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(75, 178, 237, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main {
+        padding: 15px;
+    }
+
+    .header {
+        padding: 0.8rem 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .headerContent {
+        padding: 0 15px;
+    }
+
+    .destination {
+        font-size: 1.5rem;
+    }
+
+    .dateInfo {
+        font-size: 0.9rem;
+    }
+
+    .backButton,
+    .shareButton {
+        font-size: 1.3rem;
+        padding: 0.4rem;
+    }
+
+    .photoGallery {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .photoOverlay {
+        padding: 1rem;
+    }
+
+    .photoTitle {
+        font-size: 1.1rem;
+    }
+
+    .photoDescription {
+        font-size: 0.8rem;
+    }
+}
