@@ -1,0 +1,56 @@
+{
+  "CallerReference": "oddiya-front-deployment-2025",
+  "Comment": "Oddiya Front - Travel Memory Platform",
+  "DefaultRootObject": "index.html",
+  "Origins": {
+    "Quantity": 1,
+    "Items": [
+      {
+        "Id": "S3-oddiya-front-static",
+        "DomainName": "oddiya-front-static.s3.amazonaws.com",
+        "S3OriginConfig": {
+          "OriginAccessIdentity": ""
+        },
+        "OriginAccessControlId": "E1A47OH77EY2ZJ"
+      }
+    ]
+  },
+  "DefaultCacheBehavior": {
+    "TargetOriginId": "S3-oddiya-front-static",
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "AllowedMethods": {
+      "Quantity": 2,
+      "Items": ["GET", "HEAD"],
+      "CachedMethods": {
+        "Quantity": 2,
+        "Items": ["GET", "HEAD"]
+      }
+    },
+    "Compress": true,
+    "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+    "ResponseHeadersPolicyId": "67f7725c-6f97-4210-82d7-5512b31e9d03"
+  },
+  "CustomErrorResponses": {
+    "Quantity": 2,
+    "Items": [
+      {
+        "ErrorCode": 404,
+        "ResponseCode": "200",
+        "ResponsePagePath": "/index.html",
+        "ErrorCachingMinTTL": 10
+      },
+      {
+        "ErrorCode": 403,
+        "ResponseCode": "200",
+        "ResponsePagePath": "/index.html",
+        "ErrorCachingMinTTL": 10
+      }
+    ]
+  },
+  "Enabled": true,
+  "PriceClass": "PriceClass_100",
+  "ViewerCertificate": {
+    "CloudFrontDefaultCertificate": true
+  },
+  "HttpVersion": "http2and3"
+}

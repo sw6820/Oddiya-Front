@@ -1,0 +1,42 @@
+=================================
+Oddiya Front CloudFront Deployment
+=================================
+Date: January 14, 2025
+Bucket: oddiya-front-static
+Region: ap-northeast-2
+Distribution ID: E1YQCU2TNJ1IIF
+CloudFront URL: https://d2dl9p7inrij8.cloudfront.net
+
+BACKEND SERVICES:
+ALB URL: http://oddiya-alb-56303406.ap-northeast-2.elb.amazonaws.com
+Health Check: http://oddiya-alb-56303406.ap-northeast-2.elb.amazonaws.com/v1/health
+
+FRONTEND ACCESS:
+Production URL: https://d2dl9p7inrij8.cloudfront.net
+
+DEPLOYMENT STATUS:
+✅ S3 Bucket: oddiya-front-static (static files uploaded)
+✅ CloudFront Distribution: E1YQCU2TNJ1IIF (Status: InProgress)
+✅ Origin Access Control: E1A47OH77EY2ZJ
+✅ Bucket Policy: Configured for CloudFront access
+
+NOTES:
+1. CloudFront distribution takes 15-20 minutes to fully deploy globally
+2. The frontend is configured to connect to the backend ALB
+3. CORS is configured on the backend for cross-origin requests
+4. API routes from Next.js won't work with static export
+   - These need to be deployed as separate Lambda functions if needed
+
+NEXT STEPS:
+1. Wait for CloudFront distribution to be deployed (check status)
+2. Test the frontend at https://d2dl9p7inrij8.cloudfront.net
+3. Verify backend connectivity through ALB
+4. Fix any remaining backend startup issues
+
+MONITORING:
+Check distribution status:
+aws cloudfront get-distribution --id E1YQCU2TNJ1IIF --query 'Distribution.Status'
+
+Invalidate cache after updates:
+aws cloudfront create-invalidation --distribution-id E1YQCU2TNJ1IIF --paths "/*"
+=================================

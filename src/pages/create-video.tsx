@@ -107,33 +107,73 @@ const CreateVideo: NextPage = () => {
 
         setIsGenerating(true);
         try {
-            const response = await fetch("/api/lambda/render", {
-                method: "POST",
+            // Use backend API server
+            const backendApiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+            
+            console.log('Video generation request:', {
+                apiUrl: backendApiUrl,
+                title: text,
+                imageCount: images.length
+            });
+            
+            // Call backend video render endpoint
+            const response = await fetch(`${backendApiUrl}/v1/video/render`, {
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    id: "BeatVideo", // 슬라이드 스타일 제거
-                    inputProps: {
-                        title: text,
-                        images: images,
-                        music: musicFile || undefined,
-                    },
-                }),
+                    title: text,
+                    images: images,
+                    music: musicFile || null,
+                    duration: 15, // seconds
+                    format: 'mp4'
+                })
             });
+            
+            // Uncomment this when HTTPS is configured:
+            // const response = await fetch(`${videoApiUrl}/api/lambda/render`, {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify({
+            //         id: "BeatVideo",
+            //         inputProps: {
+            //             title: text,
+            //             images: images,
+            //             music: musicFile || undefined,
+            //         },
+            //     }),
+            // });
 
             if (!response.ok) {
-                throw new Error("렌더링 요청에 실패했습니다.");
+                const error = await response.json().catch(() => ({ message: "Unknown error" }));
+                throw new Error(error.message || "렌더링 요청에 실패했습니다.");
             }
 
             const result = await response.json();
             console.log("렌더링 결과:", result);
 
-            // 다운로드 링크가 있으면 다운로드
-            if (result.outputUrl) {
+            // Download the generated video
+            if (result.downloadUrl) {
+                // Use backend download endpoint
+                const backendApiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+                const downloadUrl = `${backendApiUrl}${result.downloadUrl}`;
+                
+                const link = document.createElement("a");
+                link.href = downloadUrl;
+                link.download = `oddiya-video-${result.renderId || Date.now()}.mp4`;
+                link.target = "_blank"; // Open in new tab to trigger download
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else if (result.outputUrl) {
+                // Fallback to direct URL if provided
                 const link = document.createElement("a");
                 link.href = result.outputUrl;
                 link.download = "video.mp4";
+                link.target = "_blank";
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);

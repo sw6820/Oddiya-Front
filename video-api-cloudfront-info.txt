@@ -1,0 +1,13 @@
+Video API CloudFront Configuration
+===================================
+Distribution ID: 
+CloudFront URL: https://
+Origin: http://43.201.84.175:3001
+Status: Deploying (15-20 minutes)
+
+To check status:
+aws cloudfront get-distribution --id  --query 'Distribution.Status'
+
+To update frontend:
+Edit .env.production:
+NEXT_PUBLIC_VIDEO_API_URL=https://

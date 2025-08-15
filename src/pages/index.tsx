@@ -3,6 +3,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import BottomNavigationBar from "../components/BottomNavigationBar";
+import TestConnection from "../components/TestConnection";
 import styles from "./index.module.css";
 
 const Home: NextPage = () => {
@@ -135,6 +136,13 @@ const Home: NextPage = () => {
                 여행지를 고르지 못하셨나요?
               </button>
             </div>
+            
+            {/* Test Connection Component - Remove this in production */}
+            {process.env.NODE_ENV === 'development' && (
+              <div style={{ marginTop: '2rem' }}>
+                <TestConnection />
+              </div>
+            )}
           </div>
         </div>
       </main>

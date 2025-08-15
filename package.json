@@ -5,13 +5,16 @@
   "dependencies": {
     "@hello-pangea/dnd": "^16.5.0",
     "@remotion/cli": "^4.0.331",
+    "@remotion/lambda": "^4.0.333",
     "@remotion/player": "^4.0.331",
     "@remotion/renderer": "^4.0.331",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "cors": "^2.8.5",
     "eslint": "^8",
     "eslint-config-next": "15.2.4",
+    "express": "^5.1.0",
     "next": "15.2.4",
     "react": "^18",
     "react-dom": "^18",
@@ -25,7 +28,7 @@
     "@types/react": "19.0.0",
     "@types/react-dom": "19.0.0",
     "@types/web": "0.0.166",
-    "dotenv": "16.0.3",
+    "dotenv": "^16.0.3",
     "eslint": "9.19.0",
     "eslint-config-next": "15.1.6",
     "prettier": "3.6.0",
@@ -38,6 +41,9 @@
     "lint": "eslint .",
     "remotion": "remotion studio",
     "render": "remotion render",
-    "deploy": "node deploy.mjs"
+    "deploy": "node deploy.mjs",
+    "deploy:cloudfront": "bash deploy-cloudfront.sh",
+    "deploy:api": "bash deploy-api-lambda.sh",
+    "deploy:all": "npm run deploy:api && npm run deploy:cloudfront"
   }
 }
