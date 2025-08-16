@@ -117,7 +117,7 @@ const CreateVideo: NextPage = () => {
             });
             
             // Call backend video render endpoint
-            const response = await fetch(`${backendApiUrl}/v1/video/render`, {
+            const response = await fetch(`${backendApiUrl}/api/v1/video/render`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
